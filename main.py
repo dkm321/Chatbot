@@ -11,7 +11,7 @@ import os
 from data import urls
 from config import api_key
 
-chroma_db_dir = '~/Documents/QA/chroma_db'
+chroma_db_dir = '/Users/dk/Projects/chatbot/Chatbot/chroma'
 
 os.environ['OPENAI_API_KEY'] = api_key
 
@@ -22,13 +22,14 @@ def _create_vectorstore(urls, embeddings_class):
 
     # split documents
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
-    docs = text_splitter.split_documents(documents)
+    split_docs = text_splitter.split_documents(documents)
 
     # create vector database from data
-    db = Chroma.from_documents(documents=docs, embedding=embeddings_class(), persist_directory=chroma_db_dir)
+    db = Chroma.from_documents(documents=split_docs, embedding=embeddings_class(), persist_directory=chroma_db_dir)
     db.persist()
 
     return db
+
 
 def load_vectorstore(embeddings_class):
     
@@ -75,3 +76,5 @@ def main():
 
 main()
 # _create_vectorstore(urls, OpenAIEmbeddings)
+
+

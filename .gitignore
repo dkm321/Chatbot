@@ -1,4 +1,5 @@
-chroma_db/*
+chroma/*
 wizard*
 venv/*
 config.py
+__pycache__
