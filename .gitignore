@@ -1,4 +1,6 @@
 chroma/*
+chroma_test/*
+data_test.py
 wizard*
 venv/*
 config.py

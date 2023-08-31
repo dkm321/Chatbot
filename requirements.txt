@@ -7,15 +7,16 @@ async-timeout==4.0.2
 attrs==23.1.0
 backcall==0.2.0
 backoff==2.2.1
+bcrypt==4.0.1
 beautifulsoup4==4.12.2
 bs4==0.0.1
 bullet==2.2.0
 certifi==2023.5.7
 chardet==5.2.0
 charset-normalizer==3.2.0
-chroma-hnswlib==0.7.1
+chroma-hnswlib==0.7.2
 chroma-migrate==0.0.3
-chromadb==0.3.29
+chromadb==0.4.8
 click==8.1.5
 clickhouse-connect==0.6.6
 coloredlogs==15.0.1
@@ -27,7 +28,7 @@ duckdb==0.7.1
 emoji==2.8.0
 exceptiongroup==1.1.2
 executing==1.2.0
-fastapi==0.85.1
+fastapi==0.99.1
 filetype==1.2.0
 flatbuffers==23.5.26
 frozenlist==1.4.0
@@ -101,7 +102,7 @@ sortedcontainers==2.4.0
 soupsieve==2.4.1
 SQLAlchemy==2.0.19
 stack-data==0.6.2
-starlette==0.20.4
+starlette==0.27.0
 sympy==1.12
 tabulate==0.9.0
 tenacity==8.2.2
