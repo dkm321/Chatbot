@@ -1,9 +1,10 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-
-from chain_api import ChainAPI
+from pydantic import BaseModel
 
 from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
+
+from chain_api import ChainAPI
 from config import api_key
 
 embeddings = OpenAIEmbeddingFunction(api_key=api_key)
@@ -26,17 +27,28 @@ app.add_middleware(
 )
 
 
+class Question(BaseModel):
+    question: str
+
+class Urls(BaseModel):
+    urls: list
+
+class BaseURL(BaseModel):
+    base_url: str
+
 @app.post("/ask/")
-async def ask_question(question):
+async def ask_question(question: Question):
+    print('Receiving question....')
+    print(question)
     try:
-        response = chain.ask(question)
+        response = chain.ask(question.question)
         return response['answer']
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/crawl/")
-async def crawl(base_url):
+async def crawl(base_url: BaseURL):
     try:
         urls = chain.crawl(base_url)
         return urls
@@ -45,9 +57,9 @@ async def crawl(base_url):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/add/")
-async def add_to_db(urls):
+async def add_to_db(urls: Urls):
     try:
-        chain.add_to_db([urls])
+        chain.add_to_db(urls)
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
